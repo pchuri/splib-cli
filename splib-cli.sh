@@ -5,20 +5,8 @@ curl -c c.txt -d "userId=$1&password=$2" \
 
 curl -s -b c.txt https://splib.or.kr/intro/index.do > out.txt 
 # user name
-grep "barcodeInfo" out.txt \
-| sed 's|<span.*>||' \
-| sed 's|<.*\">||' \
-| awk '{$1=$1;print}'
+awk -F '<|>' '/barcodeInfo/ {print $3}' out.txt
 # loan count
-grep "/intro/program/mypage/loanStatusList.do" out.txt \
-| sed 's|<\/span>.*>||' \
-| sed 's|<a.*">||' \
-| sed 's| <span>|:|' \
-| awk '{$1=$1;print}'
+awk -F '<|>' '/intro\/program\/mypage\/loanStatusList.do/ {sub(/ /,"",$3);print $3":"$5}' out.txt 
 # doorae count
-grep "/intro/program/mypage/dooraeLillStatusList.do" out.txt \
-| sed 's|<\/span>.*>||' \
-| sed 's|<a.*">||' \
-| sed 's| <span>|:|' \
-| awk '{$1=$1;print}'
-
+awk -F '<|>' '/\/intro\/program\/mypage\/dooraeLillStatusList.do/ {sub(/ /,"",$3);print $3":"$5}' out.txt
