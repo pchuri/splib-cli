@@ -1,0 +1,3 @@
+BEGIN { FS="<|>"}
+/barcodeInfo/ {print $3}
+/intro\/program\/mypage\/loanStatusList.do|\/intro\/program\/mypage\/dooraeLillStatusList.do/ {sub(/ /,"",$3);print $3":"$5} 
