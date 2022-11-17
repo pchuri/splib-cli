@@ -1,0 +1,2 @@
+BEGIN { FS="<|>"}
+/barcodeInfo/ {print $3} 
