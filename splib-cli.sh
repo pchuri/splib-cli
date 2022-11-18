@@ -1,7 +1,5 @@
-tmp=`mktemp -d`
-curl -c "$tmp/c.txt" -d "userId=$1&password=$2" \
--H "Content-Type: application/x-www-form-urlencoded" \
--X POST "https://splib.or.kr/intro/program/memberLoginProc.do" \
-> /dev/null 2>&1
-curl -s -b "$tmp/c.txt" https://splib.or.kr/intro/index.do | awk -f awk.script
-rm -rf "$tmp"
+LOGIN_URL="https://splib.or.kr/intro/program/memberLoginProc.do"
+INDEX_URL="https://splib.or.kr/intro/index.do"
+CT="Content-Type: application/x-www-form-urlencoded"
+D="userId=$1&password=$2"
+curl -c - -s -o/dev/null -d "$D" -H "$CT" -X POST $LOGIN_URL | curl -s -b @- $INDEX_URL | awk -f awk.script
