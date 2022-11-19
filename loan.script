@@ -1,0 +1,3 @@
+BEGIN {FS="[<>]"}
+/div class="title"/ {print NR,$3}
+/\<span\>\<strong\>/ {print $5}
