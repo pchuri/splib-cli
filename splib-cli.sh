@@ -6,4 +6,6 @@ D="userId=$1&password=$2"
 
 curl -c .c.txt -s -o/dev/null -d "$D" -H "$CT" -X POST $LOGIN_URL
 curl -s -b .c.txt $INDEX_URL | awk -f awk.script
-curl -s -b .c.txt $LOAN_URL | awk -f loan.script 
+curl -s -b .c.txt $LOAN_URL | awk -f loan.script > .loan.txt
+awk -f sum.script .loan.txt
+rm -rf .*.txt
