@@ -8,6 +8,6 @@ do
  sh splib-cli.sh $1 $2 >> out.txt
  echo '========================' >> out.txt
  shift 2
- echo $i
+ printf "Progress : (%d / %d)\r" $i $length
  i=$((i+1))
 done
