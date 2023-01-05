@@ -5,7 +5,7 @@ CT="Content-Type: application/x-www-form-urlencoded"
 D="userId=$1&password=$2"
 
 curl -c .c.txt -s -o/dev/null -d "$D" -H "$CT" -X POST $LOGIN_URL
-curl -s -b .c.txt $INDEX_URL | awk -f load1.awk 
+curl -s -b .c.txt $INDEX_URL | awk -f loan1.awk 
 curl -s -b .c.txt $LOAN_URL | awk -f loan2.awk > .loan.txt
 awk -f sum.awk .loan.txt
 rm -rf .*.txt
